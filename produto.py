@@ -1,11 +1,3 @@
-#CRUD PRODUTO
-#SEM FRAMEWORK
-#PERSISTENCIA EM MEMORIA
-#CONSOLE
-#APRESENTAR MENU
-#UTILIZAR GIT
-#ENTREGA AS 15
-
 class Produto:
     __nome:str
     __quantidade:int
@@ -35,10 +27,10 @@ class Produto:
     
     def set_categoria(self, categoria:str):
         self.__categoria = categoria                 
-          
+       
 produtos = {'nome': None, 'quantidade': None, 'valor': None, 'categoria': None}   
-list_produtos = []  
-     
+list_produtos = [] 
+      
 def adicionar_produto():
     produtos = {}
     p = Produto()
@@ -48,31 +40,49 @@ def adicionar_produto():
     p.set_categoria(str(input("Digite a categoria do Produto: ")))
     produtos['nome'] = p.get_nome()
     produtos['quantidade'] = p.get_quantidade()
-    produtos['valor'] = p.get_nome()
+    produtos['valor'] = p.get_valor()
     produtos['categoria'] = p.get_categoria()
     list_produtos.append(produtos)
     print('\nProduto Cadastrado')        
  
-def listar_produto():
-    print(list_produtos)
+def remover_produto():
+    for i in range(len(list_produtos)):
+        print(f'[{i}]. ' + str(list_produtos[i]))
+    op = int(input('\nSelecione uma opcao: '))
+    del list_produtos[op]
+ 
+def editar_produto():
+    for i in range(len(list_produtos)):
+        print(f'[{i}]. ' + str(list_produtos[i]))
+    op = int(input('\nSelecione uma opcao: '))
+    for x in range(len(list_produtos)):
+        if op == x:
+            list_produtos[op]['nome'] = str(input("Digite o nome do Produto: "))
+            list_produtos[op]['quantidade'] = int(input("Digite a quantidade do Produto: "))
+            list_produtos[op]['valor'] = float(input("Digite o valor do Produto: "))
+            list_produtos[op]['categoria'] = str(input("Digite a categoria do Produto: "))        
 
-opcoes = ['Listar','Cadastrar','Editar', 'Remover', 'Sair'] 
+def listar_produto ():
+    for i in range(len(list_produtos)):
+        print(f'[{i}]. ' + str(list_produtos[i]))
+   
+opcoes = ['Listar Produtos','Cadastrar Produto','Editar Produto', 'Remover produto', 'Sair'] 
 op = True
 
 while op:
     print('\n-- MENU --') 
     for ops, opcao in enumerate(opcoes):
         print(f'[{ops+1}] - {opcao}')
-    op = int(input('Selecione uma opcao: '))
+    op = int(input('\nSelecione uma opcao: '))
     if op == 1:
         listar_produto()
     elif op == 2:
         adicionar_produto()
     elif op == 3:
-        pass
+        editar_produto()
     elif op == 4:
-        pass
+        remover_produto()
     elif op == 5:
         exit(1) 
     elif op > len(opcoes):
-        print(f'\nOpcao incorreta, tente novamente! ')
+        print('Opcao incorreta, tente novamente! ')
