@@ -42,36 +42,42 @@ class Principal:
                 menu = True
                 while menu:
                     while menu:
+                        try:
+                            print('''
+                            Deseja cadastrar uma subcategoria?
+                            [1] - Sim
+                            [2] - Nao
+                                ''')
+                            op = int(input('Selecione uma opcao: '))
+                            if op == 1:
+                                for c in range(len(list_categorias[y]['subcategoria'])):
+                                    print(f'[{c}]. ' + str(list_categorias[y]['subcategoria'][c]))
+                                op = int(input('\nSelecione uma opcao: ')) 
+                                for q in range(len(list_categorias[y]['subcategoria'])):
+                                        if op == q:
+                                            subcategoria_list.append(list_categorias[y]['subcategoria'][q])   
+                            elif op == 2:
+                                break      
+                        except ValueError:
+                            print('Ops! Opcao indisponivel, tente novamente!')                       
+                    try:
                         print('''
-                        Deseja cadastrar uma subcategoria?
+                        Deseja cadastrar outra categoria para esse produto?
                         [1] - Sim
                         [2] - Nao
                             ''')
                         op = int(input('Selecione uma opcao: '))
                         if op == 1:
-                            for c in range(len(list_categorias[y]['subcategoria'])):
-                                print(f'[{c}]. ' + str(list_categorias[y]['subcategoria'][c]))
-                            op = int(input('\nSelecione uma opcao: ')) 
-                            for q in range(len(list_categorias[y]['subcategoria'])):
-                                    if op == q:
-                                        subcategoria_list.append(list_categorias[y]['subcategoria'][q])   
+                            for x in range(len(list_categorias)):
+                                print(f'[{x}]. ' + str(list_categorias[x]['nome']))
+                            op = int(input('\nSelecione uma opcao: '))
+                            for l in range(len(list_categorias)):
+                                if op == l:
+                                    categoria_list.append(list_categorias[l]['nome'])
                         elif op == 2:
-                            break                             
-                    print('''
-                    Deseja cadastrar outra categoria para esse produto?
-                    [1] - Sim
-                    [2] - Nao
-                        ''')
-                    op = int(input('Selecione uma opcao: '))
-                    if op == 1:
-                        for x in range(len(list_categorias)):
-                            print(f'[{x}]. ' + str(list_categorias[x]['nome']))
-                        op = int(input('\nSelecione uma opcao: '))
-                        for l in range(len(list_categorias)):
-                            if op == l:
-                                categoria_list.append(list_categorias[l]['nome'])
-                    elif op == 2:
-                        break
+                            break
+                    except ValueError:
+                        print('Ops! Opcao indisponivel, tente novamente!')                          
             produtos['categoria'] = categoria_list 
             produtos['subcategoria'] = subcategoria_list       
         produtos['nome'] = p.get_nome()
@@ -129,16 +135,19 @@ class Principal:
                 subcategoria.append(str(input("Digite o nome da subcategoria: ")))
                 op = True
                 while op:
-                    print('''
-                    Deseja cadastrar outra subcategoria para esta categoria?
-                    [1] - Sim
-                    [2] - Nao
-                        ''')
-                    op = int(input('Selecione uma opcao: '))
-                    if op == 1:
-                        subcategoria.append(str(input("Digite o nome da subcategoria: ")))
-                    elif op == 2:
-                        break
+                    try:
+                        print('''
+                        Deseja cadastrar outra subcategoria para esta categoria?
+                        [1] - Sim
+                        [2] - Nao
+                            ''')
+                        op = int(input('Selecione uma opcao: '))
+                        if op == 1:
+                            subcategoria.append(str(input("Digite o nome da subcategoria: ")))
+                        elif op == 2:
+                            break
+                    except ValueError:
+                        print('Ops! Opcao indisponivel, tente novamente!')      
             list_categorias[x]['subcategoria'] = subcategoria    
     
                 
